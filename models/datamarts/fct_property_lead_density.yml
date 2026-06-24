@@ -1,0 +1,15 @@
+version: 2
+
+models:
+
+  - name: fct_property_lead_density
+    description: >
+        This is the fact model for property lead density metrics. 
+    columns:
+        - name: surrogate_key
+          description: >
+            Surrogate key is generated based on the city_region_id and property_type_id columns. 
+            It is used as a primary key for the fct_property_lead_density table.  
+          data_tests:
+            - unique
+            - not_null
