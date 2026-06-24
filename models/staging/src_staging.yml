@@ -1,0 +1,41 @@
+version: 2
+
+sources:
+  - name: aviv_group_case_study
+    database: postgres
+    schema: aviv_group_case_study
+    tags:
+      - "raw_tables"
+    description: >
+                 Contains raw data loaded from xwelt.de.
+    tables:
+      - name: property_listings
+        description: >
+                     Property listings data from xwelt.de. It must be unique based on the listing_id. This table contains the following columns:
+                      - "listing_id": Unique identifier for each property listing. ,
+                      - "property_type": prop_type,
+                      - "city": city,
+                      - "region": region,
+                      - "price": price,
+                      - "created_at": created_at,
+                      - "updated_at": updated_at
+
+      - name: leads_contacts
+        description: > 
+                      Leads contacts data from xwelt.de. It must be unique based on the contact_id. This table contains the following columns:
+                      - "contact_id": contact_id,
+                      - "listing_id": listing_id,
+                      - "contact_source": contact_source,
+                      - "contact_timestamp": contact_timestamp                
+      
+      - name: city_region
+        description: >
+                      City region mapping data from xwelt.de. It must be unique based on the city. This table contains the following columns:
+                      - "city": city,
+                      - "region": region
+
+      - name: property_type
+        description: >
+                      Property type mapping data from xwelt.de. It must be unique based on the property_type. This table contains the following columns:
+                      - "property_type": property_type,
+                      - "property_type_group": property_type_group

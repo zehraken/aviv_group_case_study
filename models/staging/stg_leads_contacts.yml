@@ -1,0 +1,23 @@
+version: 2
+
+models:
+
+  - name: stg_leads_contacts
+    description: >
+        This is the staging model for the lead_contacts source table. 
+        It is materialized as a table and is located in the staging schema. This model contains the following columns:
+    columns:
+        - name: surrogate_key
+          description: Surrogate key is generated based on the contact_id column. It is used as a primary key for the lead_contacts table.  
+          data_tests:
+            - unique
+            - not_null
+
+        - name: listing_id
+          description: "Foreign key to stg_property_listings"
+          data_tests:
+            - not_null
+            - relationships:
+                arguments:
+                  to: ref('stg_property_listings')
+                  field: listing_id

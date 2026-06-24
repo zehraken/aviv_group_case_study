@@ -1,0 +1,44 @@
+version: 2
+
+models:
+
+  - name: stg_property_listings
+    description: >
+        This is the staging model for the property_listings source table. 
+        It is materialized as a table and is located in the staging schema. This model contains the following columns:
+    columns:
+        - name: surrogate_key
+          description: Surrogate key is generated based on the listing_id column. It is used as a primary key for the property_listings table.  
+          data_tests:
+            - unique
+            - not_null
+
+        - name: property_type_id
+          description: "Foreign key to stg_property_type"
+          data_tests:
+            - not_null
+            - relationships:
+                config:
+                  severity: warn
+                arguments:            
+                  to: ref('stg_property_type')
+                  field: property_type_id
+
+        - name: city_region_id
+          description: "Foreign key to stg_city_region"
+          data_tests:
+            - not_null
+            - relationships:
+                config:
+                  severity: error
+                arguments:
+                  to: ref('stg_city_region')
+                  field: city_region_id            
+
+        - name: price_eur
+          data_tests:
+            - if_price_is_negative:
+                config:
+                  store_failures: true
+                  schema: aviv_group_case_study
+                  alias: negative_price_test
