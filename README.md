@@ -70,8 +70,6 @@ If the transactional data updates frequently, it is more efficient to load recen
 
 ## Design Notes
 
-<img src="./images/Tables.png" alt="Project Tables"/>
-
 | Table / Object Name | Object Type / Source | Description |
 | :--- | :--- | :--- |
 | **lead_contacts** | Raw Table (S3) | Will be loaded from S3 with Snowflake `COPY INTO` |
