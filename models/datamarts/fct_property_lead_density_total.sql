@@ -11,16 +11,14 @@ with listings as (
 
 lead_counts as (
     select
-        left(contact_timestamp::text, 7) as contact_month,
         listing_id,
         count(contact_id) as total_leads 
     from {{ ref('stg_leads_contacts') }}
-    group by 1,2
+    group by 1
 ),
 
 joined_data as (
     select
-        l.created_month,
         l.city_region_id,
         l.property_type_id,
         l.listing_id,
@@ -28,13 +26,11 @@ joined_data as (
     from listings l
     left join lead_counts lc 
         on l.listing_id = lc.listing_id
-        and l.created_month = lc.contact_month
 ),
 
 joined_aggregated as (
 
     select
-        created_month,
         city_region_id,
         property_type_id,
         count(distinct listing_id) as total_active_listings,
@@ -47,18 +43,16 @@ joined_aggregated as (
             else 0 
         end as avg_leads_per_listing
     from joined_data
-    group by 1, 2, 3
+    group by 1, 2
 
 )
 
 -- In the final stage, we aggregate metrics based on region and property type.
 select
     {{ dbt_utils.generate_surrogate_key([
-        'created_month',
         'city_region_id',
         'property_type_id'
     ]) }} as surrogate_key,
-    created_month,
     city_region_id,
     property_type_id,
     total_active_listings,

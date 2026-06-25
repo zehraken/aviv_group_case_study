@@ -2,7 +2,7 @@ version: 2
 
 models:
 
-  - name: fct_property_lead_density
+  - name: fct_property_lead_density_total
     description: >
         This is the fact model for property lead density metrics. 
     columns:
