@@ -88,6 +88,10 @@ If the transactional data updates frequently, it is more efficient to load recen
 
 <img src="./images/Infrastructure_Generated_with_AI.png" alt="Project Structure"/>
 
+
+## Dashboard Sample
+<img src="./images/Dashboard_Example.png" alt="Dashboard"/>
+
 ## Data Quality Issues for the MOCK Data
 
 * **Missing (Null) Values:** The prices of some listings or the sources of some leads appear as `None` or `NaN`.
