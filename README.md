@@ -19,6 +19,8 @@ I would prefer to load the data into Snowflake through dbt data models using Sno
 
 I would only prefer using Snowsight for one-off data movements or when data needs to be loaded just a few times. If the data size is large, the `COPY INTO` command will perform significantly better than Snowsight loads. 
 
+If we need continous loadin we can aslo use Snwopipe which can be triggered through an AWS SNS/SQS. Comparing to copy into it could be ideal for small real time batches. 
+
 Other solutions are also possible, such as external tables (linking directly to files, which is better for archived, unchanged data files), Python code (Snowpark), or third-party tools like DataVirtuality, Daton, or Fivetran. However, these options come with their own disadvantages. The best practice is to manage data models and data loads internally within the company.
 
 ### Model with dbt
